@@ -13,5 +13,6 @@
         <module>registry</module>
         <module>monitor</module>
         <module>auth</module>
+        <module>user-service</module>
     </modules>
 </project>
