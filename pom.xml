@@ -43,7 +43,8 @@
         <module>gateway</module>
         <module>registry</module>
         <module>monitor</module>
-        <module>auth</module>
+        <module>config-server</module>
+        <module>auth-service</module>
         <module>user-service</module>
     </modules>
 </project>
