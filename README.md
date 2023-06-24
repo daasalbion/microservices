@@ -32,7 +32,8 @@ kubectl delete svc gateway-service
 kubectl get service -o wide
 
 ## expose service
-kubectl expose deployment monitor-service --type=LoadBalancer --name=monitor-service-exposed
+kubectl expose deployment registry --type=LoadBalancer --name=registry-exposed
+kubectl expose deployment monitor --type=LoadBalancer --name=monitor-exposed
 
 ## connect to a pod
 kubectl exec --stdin --tty registry-service-7d9d7ccf6d-z9m5q -- /bin/bash
