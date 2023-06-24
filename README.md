@@ -48,3 +48,8 @@ minikube dashboard
 
 ## tunnel
 minikube tunnel
+
+### Environments
+* default -> local
+* development -> local kubernetes
+* production -> cloud provider
