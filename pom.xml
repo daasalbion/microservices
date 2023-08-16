@@ -40,12 +40,12 @@
     </dependencyManagement>
 
     <modules>
-        <module>gateway</module>
-        <module>registry</module>
-        <module>monitor</module>
-        <module>config-server</module>
-        <module>auth-service</module>
-        <module>user-service</module>
         <module>commons</module>
+        <module>config-server</module>
+        <module>gateway</module>
+        <module>identity-service</module>
+        <module>monitor</module>
+        <module>registry</module>
+        <module>user-service</module>
     </modules>
 </project>
