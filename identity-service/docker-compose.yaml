@@ -1,0 +1,23 @@
+version: '3'
+services:
+  identity-service:
+    build: ./
+    container_name: identity-service
+    image: daasalbion/identity-service:0.0.2-SNAPSHOT
+    ports:
+      - "9003:9003"
+    volumes:
+      - ./logs:/logs
+  identity-db:
+    container_name: identity-db
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-root}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-root}
+      POSTGRES_DB: identitydb
+
+#use existing network
+networks:
+  default:
+    external:
+      name: daas-network

@@ -1,0 +1,14 @@
+version: '3'
+services:
+  registry-service:
+    build: ./
+    image: daasalbion/registry:0.0.2-SNAPSHOT
+    container_name: registry
+    ports:
+      - "9000:9000"
+
+#use existing network
+networks:
+  default:
+    external:
+      name: daas-network

@@ -1,0 +1,150 @@
+server:
+  port: 9002
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: gateway
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888/}
+    activate:
+      on-profile:
+        - local
+  boot:
+    admin:
+      client:
+        url: http://localhost:9001/admin/
+        enabled: false
+  cloud:
+    gateway:
+      routes:
+        - id: auth-service
+          uri: http://localhost:9003
+          predicates:
+            - Path=/api/auth/**
+        - id: user-service
+          uri: http://localhost:9004
+          predicates:
+            - Path=/api/users/**
+logging:
+  file:
+    path: ./gateway/logs
+  level:
+    org:
+      springframework:
+        security: DEBUG
+    com:
+      netflix:
+        discovery: ERROR
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin@localhost:9000/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 3
+    lease-expiration-duration-in-seconds: 3
+    hostname: localhost
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+
+security:
+  jwt:
+    token:
+      secret-key: secret-key-for-encryption
+      expiration: 600000
+
+---
+
+server:
+  port: 9002
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: gateway
+  config:
+    import: optional:configserver:http://config-server:8888
+    activate:
+      on-profile:
+        - default
+  boot:
+    admin:
+      client:
+        url: http://monitor:9001/admin/
+  cloud:
+    gateway:
+      routes:
+        - id: auth-service
+          uri: http://auth-service:9003
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - AuthenticationFilter
+        - id: user-service
+          uri: http://user-service:9004
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - AuthenticationFilter
+
+logging:
+  file:
+    path: ./gateway/logs
+  level:
+    org:
+      springframework:
+        security: DEBUG
+    com:
+      netflix:
+        discovery: ERROR
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin@registry:9000/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 3
+    lease-expiration-duration-in-seconds: 3
+    hostname: registry
+
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+
+security:
+  jwt:
+    token:
+      secret-key: secret-key-for-encryption
+      expiration: 600000

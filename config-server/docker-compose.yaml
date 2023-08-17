@@ -1,0 +1,17 @@
+version: '3'
+services:
+  config-server-service:
+    build: ./
+    image: config-server:0.0.1-SNAPSHOT
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./logs:/logs
+      - "/etc/localtime:/etc/localtime:ro"
+
+#use existing network
+networks:
+  default:
+    external:
+      name: daas-network

@@ -1,0 +1,14 @@
+version: '3'
+services:
+  gateway-service:
+    build: ./
+    image: daasalbion/gateway:0.0.2-SNAPSHOT
+    container_name: gateway
+    ports:
+      - "9002:9002"
+
+#use existing network
+networks:
+  default:
+    external:
+      name: daas-network

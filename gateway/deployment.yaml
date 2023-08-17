@@ -1,0 +1,73 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  creationTimestamp: null
+  name: daas-network
+spec:
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              io.kompose.network/daas-network: "true"
+  podSelector:
+    matchLabels:
+      io.kompose.network/daas-network: "true"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.28.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: gateway-service
+  name: gateway-service
+spec:
+  ports:
+    - name: "9002"
+      port: 9002
+      targetPort: 9002
+  selector:
+    io.kompose.service: gateway-service
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.28.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: gateway-service
+  name: gateway-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: gateway-service
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.28.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/daas-network: "true"
+        io.kompose.service: gateway-service
+    spec:
+      containers:
+        - image: daasalbion/gateway:0.0.1-SNAPSHOT
+          name: gateway
+          ports:
+            - containerPort: 9002
+      restartPolicy: Always
+status: {}
+
+
+

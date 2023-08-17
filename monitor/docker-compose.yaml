@@ -1,0 +1,14 @@
+version: '3'
+services:
+  monitor-service:
+    build: ./
+    image: daasalbion/monitor:0.0.2-SNAPSHOT
+    container_name: monitor
+    ports:
+      - "9001:9001"
+
+#use existing network
+networks:
+  default:
+    external:
+      name: daas-network
