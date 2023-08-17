@@ -14,15 +14,10 @@ import org.mockito.Mockito;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import py.com.daas.microservice.auth.dtos.LoginDto;
-import py.com.daas.microservice.auth.entities.Role;
 import py.com.daas.microservice.auth.entities.User;
-import py.com.daas.microservice.auth.repositories.RoleRepository;
 import py.com.daas.microservice.auth.services.impl.AuthServiceImpl;
-import py.com.daas.microservice.auth.services.impl.UserServiceImpl;
 import py.com.daas.microservice.commons.exceptions.AppException;
 
 class AuthServiceTests {
