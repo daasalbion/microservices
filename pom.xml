@@ -9,8 +9,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>py.com.daas.microservices</groupId>
-    <artifactId>microservices</artifactId>
+    <groupId>py.com.daas.microservice</groupId>
+    <artifactId>microservice-parent</artifactId>
     <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
