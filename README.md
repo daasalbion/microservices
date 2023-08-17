@@ -1,4 +1,6 @@
-# Microservices
+![Coverage](.github/badges/jacoco.svg)
+
+# [WIP] Microservices
 
 ## build packages
 mvn clean package -DskipTests
