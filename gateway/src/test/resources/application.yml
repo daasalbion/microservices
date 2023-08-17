@@ -24,25 +24,6 @@ spring:
           uri: http://localhost:9004
           predicates:
             - Path=/api/users/**
-logging:
-  file:
-    path: ./gateway/logs
-  level:
-    org:
-      springframework:
-        security: DEBUG
-    com:
-      netflix:
-        discovery: ERROR
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
 
 eureka:
   client:
