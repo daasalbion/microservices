@@ -198,3 +198,53 @@ java.lang.IllegalStateException: couldn't determine local port. Please set sprin
 2023-08-17T13:27:16.381-04:00  INFO 30871 --- [SpringApplicationShutdownHook] o.s.c.n.e.server.EurekaServerBootstrap   : Eureka Service is now shutdown...
 2023-08-17T13:27:16.381-04:00  INFO 30871 --- [SpringApplicationShutdownHook] c.n.eureka.DefaultEurekaServerContext    : Shutting down ...
 2023-08-17T13:27:16.384-04:00  INFO 30871 --- [SpringApplicationShutdownHook] c.n.eureka.DefaultEurekaServerContext    : Shut down
+2023-08-17T17:39:51.895Z  INFO 2258 --- [main] p.c.d.m.r.RegistryApplicationTests       : Starting RegistryApplicationTests using Java 17.0.8 with PID 2258 (started by runner in /home/runner/work/microservices/microservices/registry)
+2023-08-17T17:39:51.897Z  INFO 2258 --- [main] p.c.d.m.r.RegistryApplicationTests       : No active profile set, falling back to 1 default profile: "default"
+2023-08-17T17:39:51.954Z  INFO 2258 --- [main] o.s.c.c.c.ConfigServerConfigDataLoader   : Fetching config from server at : http://config-server:8888
+2023-08-17T17:39:51.954Z  INFO 2258 --- [main] o.s.c.c.c.ConfigServerConfigDataLoader   : Exception on Url - http://config-server:8888:org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-server:8888/eureka/default": config-server. Will be trying the next url if available
+2023-08-17T17:39:51.954Z  WARN 2258 --- [main] o.s.c.c.c.ConfigServerConfigDataLoader   : Could not locate PropertySource ([ConfigServerConfigDataResource@2d2133fd uris = array<String>['http://config-server:8888'], optional = true, profiles = list['default']]): I/O error on GET request for "http://config-server:8888/eureka/default": config-server
+2023-08-17T17:39:51.955Z  INFO 2258 --- [main] o.s.c.c.c.ConfigServerConfigDataLoader   : Fetching config from server at : http://config-server:8888
+2023-08-17T17:39:51.955Z  INFO 2258 --- [main] o.s.c.c.c.ConfigServerConfigDataLoader   : Exception on Url - http://config-server:8888:org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-server:8888/eureka/default": config-server. Will be trying the next url if available
+2023-08-17T17:39:51.955Z  WARN 2258 --- [main] o.s.c.c.c.ConfigServerConfigDataLoader   : Could not locate PropertySource ([ConfigServerConfigDataResource@4d8522ff uris = array<String>['http://config-server:8888'], optional = true, profiles = list['default']]): I/O error on GET request for "http://config-server:8888/eureka/default": config-server
+2023-08-17T17:39:54.305Z  INFO 2258 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=ce3c48ca-544b-33b5-af3b-3536a0a74e72
+2023-08-17T17:39:56.133Z  INFO 2258 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 17 endpoint(s) beneath base path '/actuator'
+2023-08-17T17:39:56.211Z  INFO 2258 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6c743da, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@722af653, org.springframework.security.web.context.SecurityContextHolderFilter@46dc6087, org.springframework.security.web.header.HeaderWriterFilter@66b8f244, org.springframework.security.web.csrf.CsrfFilter@33a8f3e7, org.springframework.security.web.authentication.logout.LogoutFilter@9d09c6f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7def2e4f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7d3405c0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@71fff0b, org.springframework.security.web.access.ExceptionTranslationFilter@1f93cdc0]
+2023-08-17T17:39:57.638Z  WARN 2258 --- [main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2023-08-17T17:39:58.040Z  INFO 2258 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2023-08-17T17:39:58.199Z  INFO 2258 --- [main] c.n.eureka.DefaultEurekaServerContext    : Initializing ...
+2023-08-17T17:39:58.203Z  WARN 2258 --- [main] c.n.eureka.cluster.PeerEurekaNodes       : The replica size seems to be empty. Check the route 53 DNS Registry
+2023-08-17T17:39:58.312Z  INFO 2258 --- [main] c.n.e.registry.AbstractInstanceRegistry  : Finished initializing remote region registries. All known remote regions: []
+2023-08-17T17:39:58.321Z  INFO 2258 --- [main] c.n.eureka.DefaultEurekaServerContext    : Initialized
+2023-08-17T17:39:58.603Z  INFO 2258 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application EUREKA with eureka with status UP
+2023-08-17T17:39:58.646Z  INFO 2258 --- [Thread-11] o.s.c.n.e.server.EurekaServerBootstrap   : isAws returned false
+2023-08-17T17:39:58.647Z  INFO 2258 --- [Thread-11] o.s.c.n.e.server.EurekaServerBootstrap   : Initialized server context
+2023-08-17T17:39:58.647Z  INFO 2258 --- [Thread-11] c.n.e.r.PeerAwareInstanceRegistryImpl    : Got 1 instances from neighboring DS node
+2023-08-17T17:39:58.647Z  INFO 2258 --- [Thread-11] c.n.e.r.PeerAwareInstanceRegistryImpl    : Renew threshold is: 1
+2023-08-17T17:39:58.648Z  INFO 2258 --- [Thread-11] c.n.e.r.PeerAwareInstanceRegistryImpl    : Changing status to UP
+2023-08-17T17:39:58.655Z  INFO 2258 --- [main] p.c.d.m.r.RegistryApplicationTests       : Started RegistryApplicationTests in 9.225 seconds (process running for 12.129)
+2023-08-17T17:39:58.685Z  INFO 2258 --- [Thread-11] e.s.EurekaServerInitializerConfiguration : Started Eureka Server
+2023-08-17T17:39:58.698Z ERROR 2258 --- [registrationTask1] o.s.s.s.TaskUtils$LoggingErrorHandler    : Unexpected error occurred in scheduled task
+
+java.lang.IllegalStateException: couldn't determine local port. Please set spring.boot.admin.client.instance.service-base-url.
+	at de.codecentric.boot.admin.client.registration.DefaultApplicationFactory.getLocalServerPort(DefaultApplicationFactory.java:205) ~[spring-boot-admin-client-3.0.4.jar:3.0.4]
+	at de.codecentric.boot.admin.client.registration.DefaultApplicationFactory.getServiceBaseUrl(DefaultApplicationFactory.java:109) ~[spring-boot-admin-client-3.0.4.jar:3.0.4]
+	at de.codecentric.boot.admin.client.registration.ServletApplicationFactory.getServiceUrl(ServletApplicationFactory.java:62) ~[spring-boot-admin-client-3.0.4.jar:3.0.4]
+	at de.codecentric.boot.admin.client.registration.ServletApplicationFactory.getManagementBaseUrl(ServletApplicationFactory.java:77) ~[spring-boot-admin-client-3.0.4.jar:3.0.4]
+	at de.codecentric.boot.admin.client.registration.DefaultApplicationFactory.getHealthUrl(DefaultApplicationFactory.java:165) ~[spring-boot-admin-client-3.0.4.jar:3.0.4]
+	at de.codecentric.boot.admin.client.registration.DefaultApplicationFactory.createApplication(DefaultApplicationFactory.java:80) ~[spring-boot-admin-client-3.0.4.jar:3.0.4]
+	at de.codecentric.boot.admin.client.registration.DefaultApplicationRegistrator.register(DefaultApplicationRegistrator.java:56) ~[spring-boot-admin-client-3.0.4.jar:3.0.4]
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54) ~[spring-context-6.0.9.jar:6.0.9]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305) ~[na:na]
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2023-08-17T17:39:59.837Z  INFO 2258 --- [SpringApplicationShutdownHook] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application EUREKA with eureka with status DOWN
+2023-08-17T17:39:59.839Z  INFO 2258 --- [SpringApplicationShutdownHook] o.s.c.n.e.server.EurekaServerBootstrap   : Shutting down Eureka Server..
+2023-08-17T17:39:59.850Z  INFO 2258 --- [SpringApplicationShutdownHook] c.n.eureka.DefaultEurekaServerContext    : Shutting down ...
+2023-08-17T17:39:59.879Z  INFO 2258 --- [SpringApplicationShutdownHook] c.n.eureka.DefaultEurekaServerContext    : Shut down
+2023-08-17T17:39:59.879Z  INFO 2258 --- [SpringApplicationShutdownHook] o.s.c.n.e.server.EurekaServerBootstrap   : Eureka Service is now shutdown...
+2023-08-17T17:39:59.880Z  INFO 2258 --- [SpringApplicationShutdownHook] c.n.eureka.DefaultEurekaServerContext    : Shutting down ...
+2023-08-17T17:39:59.907Z  INFO 2258 --- [SpringApplicationShutdownHook] c.n.eureka.DefaultEurekaServerContext    : Shut down
