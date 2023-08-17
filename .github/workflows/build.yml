@@ -2,9 +2,9 @@ name: Build, test & coverage
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "develop" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "develop" ]
 
 permissions:
   contents: write
