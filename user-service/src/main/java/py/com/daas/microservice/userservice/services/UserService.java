@@ -1,51 +1,35 @@
 package py.com.daas.microservice.userservice.services;
 
-import java.util.List;
-
-import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
-import jakarta.ws.rs.NotFoundException;
+import py.com.daas.microservice.userservice.dtos.UserDto;
 import py.com.daas.microservice.userservice.entities.User;
-import py.com.daas.microservice.userservice.repositories.UserRepository;
-import py.com.daas.microservice.commons.events.UserEvent;
 
-@Service
-public class UserService {
+public interface UserService {
+    String USERNAME_EXISTS = "User with username = %s, already exists";
 
-    private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
-    private final KafkaTemplate<String, UserEvent> kafkaTemplate;
+    UserDto create(UserDto user);
+    UserDto update(Long id, UserDto user);
+    UserDto get(Long id);
+    UserDto delete(Long id);
+    Page<UserDto> list(Pageable pageable);
 
-    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, KafkaTemplate<String, UserEvent> kafkaTemplate) {
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-        this.kafkaTemplate = kafkaTemplate;
+    /**
+     * For creating a User
+     * @param userDto dto for user
+     * @return User entity
+     */
+    static User toUser(UserDto userDto) {
+        return new User(userDto.id(), userDto.fullName(), userDto.email(), userDto.password());
     }
 
-    public User create(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        User newUser = userRepository.save(user);
-        sendMessage(new UserEvent(newUser.getDisplayName(), newUser.getUsername(), newUser.getPassword()));
-        return newUser;
+    static User toUser(UserDto userDto, PasswordEncoder passwordEncoder) {
+        return new User(userDto.id(), userDto.fullName(), userDto.email(), passwordEncoder.encode(userDto.password()));
     }
 
-    public User get(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("User not found"));
-    }
-
-    public void delete(Long id) {
-        User user = get(id);
-        userRepository.delete(user);
-    }
-
-    public List<User> getAll() {
-        return userRepository.findAll();
-    }
-
-    private void sendMessage(UserEvent msg) {
-        kafkaTemplate.send("users", msg);
+    static UserDto toUserDto(User user) {
+        return new UserDto(user.getId(), user.getFullName(), user.getUsername(), user.getPassword());
     }
 }

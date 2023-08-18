@@ -1,4 +1,4 @@
-package py.com.daas.microservice.userservice.configuration;
+package py.com.daas.microservice.userservice.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/users/**").permitAll()
+                .requestMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .build();

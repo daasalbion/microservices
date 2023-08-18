@@ -1,4 +1,4 @@
-package py.com.daas.microservice.userservice.configuration;
+package py.com.daas.microservice.userservice.configurations;
 
 import java.util.HashMap;
 import java.util.Map;
