@@ -4,19 +4,17 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import py.com.daas.microservice.commons.events.UserEvent;
 import py.com.daas.microservice.commons.exceptions.AppException;
 import py.com.daas.microservice.userservice.dtos.UserDto;
 import py.com.daas.microservice.userservice.entities.User;
 import py.com.daas.microservice.userservice.repositories.UserRepository;
+import py.com.daas.microservice.userservice.services.NotificationService;
 import py.com.daas.microservice.userservice.services.UserService;
 
 @Service
@@ -24,21 +22,18 @@ public class UserServiceImpl implements UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
-    private final String topic;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    private final KafkaTemplate<String, UserEvent> kafkaTemplate;
+    private final NotificationService notificationService;
 
     public UserServiceImpl(
-        @Value("${kafka.topic}") String topic,
         PasswordEncoder passwordEncoder,
         UserRepository userRepository,
-        KafkaTemplate<String, UserEvent> kafkaTemplate
+        NotificationService notificationService
     ) {
-        this.topic = topic;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
-        this.kafkaTemplate = kafkaTemplate;
+        this.notificationService = notificationService;
     }
 
     @Override
@@ -50,7 +45,7 @@ public class UserServiceImpl implements UserService {
         }
         User user = UserService.toUser(userDto, passwordEncoder);
         User newUser = userRepository.save(user);
-        sendMessage(new UserEvent(newUser.getFullName(), newUser.getUsername(), newUser.getPassword()));
+        sendMessage(newUser);
 
         return UserService.toUserDto(newUser);
     }
@@ -101,11 +96,8 @@ public class UserServiceImpl implements UserService {
     }
 
     // ref: https://docs.spring.io/spring-kafka/reference/html/#kafka-template
-    private void sendMessage(UserEvent msg) {
-        try {
-            kafkaTemplate.send(topic, msg);
-        } catch (Exception ex) {
-            LOGGER.error("Can't send message = {} to users topic", msg, ex);
-        }
+    private void sendMessage(User newUser) {
+        LOGGER.info("sending User = {} to external service", newUser);
+        notificationService.sendNewUser(newUser);
     }
 }

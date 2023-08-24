@@ -16,7 +16,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import py.com.daas.microservice.commons.exceptions.AppException;
@@ -28,15 +27,15 @@ import py.com.daas.microservice.userservice.services.impl.UserServiceImpl;
 class UserServiceTests {
 
     private final PasswordEncoder passwordEncoder = Mockito.mock(PasswordEncoder.class);
-    private final KafkaTemplate kafkaTemplate = Mockito.mock(KafkaTemplate.class);
+    private final NotificationService notificationService = Mockito.mock(NotificationService.class);
     private final UserRepository userRepository = Mockito.mock(UserRepository.class);
     private UserService userService;
     private User user;
 
     @BeforeEach
     public void setup() {
+        userService = new UserServiceImpl(passwordEncoder, userRepository, notificationService);
         user = new User(1L, "daas", "daas", "daas");
-        userService = new UserServiceImpl("topic", passwordEncoder, userRepository, kafkaTemplate);
     }
 
     @Test
