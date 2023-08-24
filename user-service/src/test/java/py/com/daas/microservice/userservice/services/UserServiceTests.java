@@ -36,7 +36,7 @@ class UserServiceTests {
     @BeforeEach
     public void setup() {
         user = new User(1L, "daas", "daas", "daas");
-        userService = new UserServiceImpl(passwordEncoder, userRepository, kafkaTemplate);
+        userService = new UserServiceImpl("topic", passwordEncoder, userRepository, kafkaTemplate);
     }
 
     @Test

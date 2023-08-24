@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -23,12 +24,18 @@ public class UserServiceImpl implements UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
+    private final String topic;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final KafkaTemplate<String, UserEvent> kafkaTemplate;
 
-    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository,
-            KafkaTemplate<String, UserEvent> kafkaTemplate) {
+    public UserServiceImpl(
+        @Value("${kafka.topic}") String topic,
+        PasswordEncoder passwordEncoder,
+        UserRepository userRepository,
+        KafkaTemplate<String, UserEvent> kafkaTemplate
+    ) {
+        this.topic = topic;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.kafkaTemplate = kafkaTemplate;
@@ -37,8 +44,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto create(UserDto userDto) {
         // checks
-        boolean existUsername = userRepository.existsByUsername(userDto.email());
-        if (existUsername) {
+        boolean existsUsername = userRepository.existsByUsername(userDto.email());
+        if (existsUsername) {
             throw new AppException(String.format(USERNAME_EXISTS, userDto.email()));
         }
         User user = UserService.toUser(userDto, passwordEncoder);
@@ -96,7 +103,7 @@ public class UserServiceImpl implements UserService {
     // ref: https://docs.spring.io/spring-kafka/reference/html/#kafka-template
     private void sendMessage(UserEvent msg) {
         try {
-            kafkaTemplate.send("users", msg);
+            kafkaTemplate.send(topic, msg);
         } catch (Exception ex) {
             LOGGER.error("Can't send message = {} to users topic", msg, ex);
         }
