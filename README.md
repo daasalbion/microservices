@@ -45,6 +45,9 @@ kubectl exec --stdin --tty registry-service-7d9d7ccf6d-z9m5q -- /bin/bash
 ## start
 minikube start
 
+## stop
+minikube stop
+
 ## dashboard
 minikube dashboard
 
