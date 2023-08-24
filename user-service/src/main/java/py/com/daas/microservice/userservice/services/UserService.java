@@ -11,8 +11,8 @@ public interface UserService {
     String USERNAME_EXISTS = "User with username = %s, already exists";
 
     UserDto create(UserDto user);
-    UserDto update(Long id, UserDto user);
     UserDto get(Long id);
+    UserDto update(Long id, UserDto user);
     UserDto delete(Long id);
     Page<UserDto> list(Pageable pageable);
 

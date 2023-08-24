@@ -49,6 +49,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto get(Long id) {
+        User user = getRequiredUser(id);
+        return UserService.toUserDto(user);
+    }
+
+    @Override
     public UserDto update(Long id, UserDto userDto) {
         User savedUser = getRequiredUser(id);
         // checks
@@ -67,17 +73,14 @@ public class UserServiceImpl implements UserService {
         return UserService.toUserDto(userRepository.save(updatedUser));
     }
 
-    public UserDto get(Long id) {
-        User user = getRequiredUser(id);
-        return UserService.toUserDto(user);
-    }
-
+    @Override
     public UserDto delete(Long id) {
         User user = getRequiredUser(id);
         userRepository.delete(user);
         return UserService.toUserDto(user);
     }
 
+    @Override
     public Page<UserDto> list(Pageable pageable) {
         Page<User> page = userRepository.findAll(pageable);
         List<UserDto> list = page.stream()
