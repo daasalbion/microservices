@@ -2,10 +2,12 @@ version: '3'
 services:
   gateway-service:
     build: ./
-    image: daasalbion/gateway:0.0.2-SNAPSHOT
     container_name: gateway
+    image: daasalbion/gateway:0.0.2-SNAPSHOT
     ports:
       - "9002:9002"
+    volumes:
+      - ./logs:/logs
 
 #use existing network
 networks:

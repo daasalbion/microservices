@@ -29,7 +29,7 @@ management:
 
 logging:
   file:
-    path: ./registry/logs
+    path: ./logs
   level:
     org:
       springframework:
@@ -83,7 +83,7 @@ management:
 
 logging:
   file:
-    path: ./registry/logs
+    path: ./logs
   level:
     org:
       springframework:
