@@ -19,7 +19,7 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: auth-service
+        - id: identity-service
           uri: http://localhost:9003
           predicates:
             - Path=/api/auth/**
@@ -29,7 +29,7 @@ spring:
             - Path=/api/users/**
 logging:
   file:
-    path: ./gateway/logs
+    path: ./logs
   level:
     org:
       springframework:
@@ -92,22 +92,18 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: auth-service
-          uri: http://auth-service:9003
+        - id: identity-service
+          uri: http://identity-service:9003
           predicates:
             - Path=/api/auth/**
-          filters:
-            - AuthenticationFilter
         - id: user-service
           uri: http://user-service:9004
           predicates:
             - Path=/api/users/**
-          filters:
-            - AuthenticationFilter
 
 logging:
   file:
-    path: ./gateway/logs
+    path: ./logs
   level:
     org:
       springframework:
@@ -133,7 +129,6 @@ eureka:
     lease-renewal-interval-in-seconds: 3
     lease-expiration-duration-in-seconds: 3
     hostname: registry
-
 
 feign:
   client:
