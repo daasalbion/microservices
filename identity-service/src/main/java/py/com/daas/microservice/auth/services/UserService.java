@@ -2,6 +2,8 @@ package py.com.daas.microservice.auth.services;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import py.com.daas.microservice.auth.entities.User;
@@ -13,5 +15,6 @@ public interface UserService extends UserDetailsService {
 
     void create(UserEvent userEvent);
     Optional<User> getByUsername(String username);
+    Page<User> list(Pageable pageable);
 
 }

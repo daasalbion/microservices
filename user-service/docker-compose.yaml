@@ -2,8 +2,8 @@ version: '3'
 services:
   user-service:
     build: ./
-    image: daasalbion/user-service:0.0.2-SNAPSHOT
     container_name: user-service
+    image: daasalbion/user-service:0.0.2-SNAPSHOT
     ports:
       - "9004:9004"
     volumes:

@@ -2,13 +2,12 @@ version: '3'
 services:
   config-server-service:
     build: ./
-    image: config-server:0.0.1-SNAPSHOT
+    image: config-server:0.0.2-SNAPSHOT
     container_name: config-server
     ports:
       - "8888:8888"
     volumes:
       - ./logs:/logs
-      - "/etc/:/root/etc"
       - "/etc/localtime:/etc/localtime:ro"
 
 #use existing network

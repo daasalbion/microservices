@@ -8,6 +8,8 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -78,6 +80,11 @@ public class UserServiceImpl implements UserService {
         } catch (Exception ex) {
             LOGGER.error("Failed to create user = {}", userEvent.username(), ex);
         }
+    }
+
+    @Override
+    public Page<User> list(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
 }

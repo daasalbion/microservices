@@ -2,6 +2,8 @@ package py.com.daas.microservice.auth.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,6 +30,7 @@ public class User {
     private String username;
     private String password;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles", joinColumns
             = @JoinColumn(name = "user_id", referencedColumnName = "id"),

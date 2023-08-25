@@ -17,4 +17,4 @@ ARG JAR_FILE=target/user-service-0.0.2-SNAPSHOT.jar
 ADD ${JAR_FILE} user-service.jar
 
 # Run the jar file
-ENTRYPOINT ["java", "-Dspring.profiles.active=default", "-Djava.security.egd=file:/dev/./urandom", "-jar","/user-service.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=default", "-jar","/user-service.jar"]
