@@ -8,7 +8,6 @@ services:
       - "8888:8888"
     volumes:
       - ./logs:/logs
-      - "/etc/:/root/etc"
       - "/etc/localtime:/etc/localtime:ro"
 
 #use existing network
