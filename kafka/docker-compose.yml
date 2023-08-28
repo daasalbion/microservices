@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 
 services:
   zookeeper:
@@ -41,6 +41,8 @@ services:
     environment:
       KAFKA_BROKERCONNECT: broker:29092
 
+#use existing network
 networks:
-  daas-network:
+  default:
+    name: daas-network
     external: true

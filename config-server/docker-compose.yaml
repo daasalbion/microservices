@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 services:
   config-server-service:
     build: ./
@@ -14,5 +14,5 @@ services:
 #use existing network
 networks:
   default:
-    external:
-      name: daas-network
+    name: daas-network
+    external: true
