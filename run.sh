@@ -47,4 +47,11 @@ cd ./config-server/
 docker-compose stop
 docker-compose rm -f
 docker-compose up --build -d
+cd ../
+
+# prometheus
+cd ./prometheus/
+docker-compose stop
+docker-compose rm -f
+docker-compose up --build -d
 
